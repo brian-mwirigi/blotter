@@ -4,42 +4,37 @@ import { BlotterTable } from "../blotter";
 export default function Demo() {
   return (
     <>
-      <header className="topbar">
-        <Link className="brand" href="/">
-          <strong>Blotter</strong>
-          <span>Sample day</span>
+      <header className="nav">
+        <Link className="logo" href="/">
+          Blotter
         </Link>
-        <span className="quiet">Nothing has been sent</span>
+        <nav className="nav-links">
+          <Link href="/#faq">FAQ</Link>
+          <span>Sample day</span>
+        </nav>
       </header>
-      <section className="app">
-        <div className="product">
-          <div className="app-head">
-            <div>
-              <p className="kicker">Open item</p>
-              <h1>KSh 4,500</h1>
-            </div>
-            <span className="quiet">Amani Hardware</span>
+      <main className="section">
+        <div className="wrap">
+          <p className="eyebrow">Live demo</p>
+          <h1>KSh 4,500 still open.</h1>
+          <p className="lead">
+            Amani Hardware billed 18,000. The statement shows 13,500. The other
+            three suppliers are matched or flagged.
+          </p>
+          <div className="product-frame" style={{ marginTop: "2rem" }}>
+            <header>
+              <strong>Today</strong>
+              <span>Invoiced 52,000 · Received 47,500 · Open 4,500</span>
+            </header>
+            <BlotterTable />
           </div>
-          <div className="metrics">
-            <div>
-              <span>Invoiced</span>
-              <strong>52,000</strong>
-            </div>
-            <div>
-              <span>Received</span>
-              <strong>47,500</strong>
-            </div>
-            <div className="open">
-              <span>Still open</span>
-              <strong>4,500</strong>
-            </div>
-          </div>
-          <BlotterTable />
-          <p className="note">
-            The short receipt is dated as a UNIX timestamp. REF-102 was used twice. One amount was written as “KSh 4,500” and still matched.
+          <p className="caption">
+            The short receipt is dated as a UNIX timestamp. REF-102 was used
+            twice. Coast Sugar was written “KSh 4,500” and still matched.
+            Nothing has been sent.
           </p>
         </div>
-      </section>
+      </main>
     </>
   );
 }

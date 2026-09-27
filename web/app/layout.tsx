@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Blotter",
-  description: "The supplier was short KSh 4,500.",
+  title: "Blotter — which supplier is still unpaid",
+  description: "Blotter compares supplier invoices with a mobile-money statement and shows the gap.",
 };
 
 export default function RootLayout({

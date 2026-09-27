@@ -1,8 +1,8 @@
 const rows = [
-  ["Lake Flour", "7,500", "7,500", "Matched", "ok"],
+  ["Lake Flour", "7,500", "7,500", "Matched", ""],
   ["Amani Hardware", "18,000", "13,500", "Short 4,500", "short"],
-  ["Rift Cement", "22,000", "22,000", "Duplicate ref", "dup"],
-  ["Coast Sugar", "4,500", "KSh 4,500", "Matched", "ok"],
+  ["Rift Cement", "22,000", "22,000", "Duplicate", ""],
+  ["Coast Sugar", "4,500", "KSh 4,500", "Matched", ""],
 ] as const;
 
 export function BlotterTable() {
@@ -18,13 +18,11 @@ export function BlotterTable() {
       </thead>
       <tbody>
         {rows.map(([supplier, invoice, received, status, tone]) => (
-          <tr key={supplier} className={tone === "short" ? "open" : undefined}>
+          <tr key={supplier} className={tone || undefined}>
             <td>{supplier}</td>
             <td className="num">{invoice}</td>
             <td className="num">{received}</td>
-            <td>
-              <span className={`pill ${tone}`}>{status}</span>
-            </td>
+            <td>{status}</td>
           </tr>
         ))}
       </tbody>
