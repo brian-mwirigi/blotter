@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from app.sandbox import ScriptRejected, run_script
+from app.sandbox import ScriptRejected, child_env, run_script
 
 
 def test_script_prints_its_result():
@@ -19,3 +19,10 @@ def test_a_slow_script_is_stopped():
 def test_os_import_never_runs():
     with pytest.raises(ScriptRejected):
         run_script("import os\nos.system('echo no')\n")
+
+
+def test_api_key_is_absent_from_the_child_environment(monkeypatch):
+    monkeypatch.setenv("NVIDIA_API_KEY", "secret-value")
+    env = child_env()
+    assert "NVIDIA_API_KEY" not in env
+    assert "secret-value" not in env.values()
