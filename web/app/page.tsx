@@ -12,11 +12,15 @@ const faqs = [
   },
   {
     q: "What if the statement format breaks the first script?",
-    a: "The matcher runs in a sandbox. If it crashes, or if the totals do not tie, the error goes back and the script is rewritten. Three tries, then a labeled fallback.",
+    a: "The generated script runs in a subprocess with an import allowlist and a five-second timeout. If it crashes, or if the totals do not tie, the error goes back and the script is rewritten. Three tries, then the ledger is marked Needs review.",
   },
   {
     q: "Is the shop data real?",
     a: "No. Amani Hardware, the KSh 18,000 invoice, and the KSh 13,500 receipt are a synthetic sample. There are no customer phone numbers.",
+  },
+  {
+    q: "How does Blotter handle data privacy and AI oversight?",
+    a: "Uploads are read for that request only. The generated script is written in an isolated temporary directory that is destroyed when the run finishes. Blotter does not store the files. Uploaded file contents are included in the AI model call required to generate the reconciliation script; Blotter does not control data retention on the model provider's side. Reconcile stays off until you acknowledge data handling and AI use. That check is enforced in the demo, not only in this text. Matching is deterministic: invoice amounts against payment amounts. There is no demographic, behavioral, or identity input in the pipeline. Blotter writes code and a ledger, not creative or copyrighted content. The script runs in a subprocess with an import allowlist and a five-second timeout. If three attempts fail, the screen says Needs review and the shortfall is not taken from the script.",
   },
   {
     q: "Do we need an NVIDIA voucher?",

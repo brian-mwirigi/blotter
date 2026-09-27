@@ -94,8 +94,8 @@ img {
 }
 
 .btn:disabled {
-  opacity: 0.55;
-  cursor: wait;
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .btn:hover {
@@ -443,6 +443,20 @@ h1 {
 .demo-title span {
   color: var(--muted);
   font-size: 0.8rem;
+}
+
+.consent {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.consent input {
+  margin-top: 0.15rem;
 }
 
 .file {

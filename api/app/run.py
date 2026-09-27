@@ -112,7 +112,7 @@ def reconcile_events(csv_text: str, statement_text: str, *, pace: float = 0) -> 
         {
             "kind": "note",
             "tone": "warn",
-            "text": "Three attempts failed. The deterministic ledger is shown. This run is fallback.",
+            "text": "Three attempts failed. Needs review. The deterministic ledger is shown and was not taken from the script.",
         }
     )
     yield _sse(

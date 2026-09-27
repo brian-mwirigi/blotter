@@ -30,7 +30,7 @@ type FileText = { name: string; text: string; sample: boolean };
 const MODE: Record<string, string> = {
   healed: "Healed on retry",
   clean: "Clean pass",
-  fallback: "Fallback",
+  fallback: "Needs review",
 };
 
 export function DemoRun({
@@ -53,6 +53,7 @@ export function DemoRun({
   const [lines, setLines] = useState<Line[]>([]);
   const [attempt, setAttempt] = useState<number | null>(null);
   const [running, setRunning] = useState(false);
+  const [consented, setConsented] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
   const [engine, setEngine] = useState("");
   const nextId = useRef(0);
@@ -75,7 +76,7 @@ export function DemoRun({
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
-    if (running) return;
+    if (running || !consented) return;
     setRunning(true);
     setLines([]);
     setResult(null);
@@ -232,10 +233,20 @@ export function DemoRun({
                 Sample
               </button>
             )}
-            <button className="btn" type="submit" disabled={running}>
+            <button className="btn" type="submit" disabled={running || !consented}>
               {running ? "Reconciling…" : "Reconcile"}
             </button>
           </div>
+          <label className="consent">
+            <input
+              type="checkbox"
+              checked={consented}
+              onChange={(event) => setConsented(event.target.checked)}
+            />
+            <span>
+              I understand this prototype processes uploaded data locally for reconciliation only, with no live financial integrations, and I consent to this session&apos;s use of AI to generate and execute reconciliation logic.
+            </span>
+          </label>
         </form>
 
         <div className="demo-grid">
@@ -283,6 +294,11 @@ export function DemoRun({
                 <>
                   <p className="eyebrow">{MODE[result.mode] || result.mode}</p>
                   <h2>{result.headline}</h2>
+                  {result.mode === "fallback" ? (
+                    <p className="detail">
+                      Three attempts failed. This ledger was not accepted from the script.
+                    </p>
+                  ) : null}
                   {result.detail ? <p className="detail">{result.detail}</p> : null}
                   <p className="counts">
                     <strong>{result.matched}</strong> reconciled

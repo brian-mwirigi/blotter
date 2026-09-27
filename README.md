@@ -25,3 +25,7 @@ npm run dev
 Open http://localhost:3000. Live demo is http://localhost:3000/demo.
 
 Put `CURSOR_API_KEY` in a gitignored `.env`. Reconcile then calls Composer 2.5 only. Without the key, the sandbox runs a local script and the log says local.
+
+## Disclosure
+
+Human oversight: if reconciliation cannot be resolved after 3 attempts, the demo marks the case “Needs review” and shows the deterministic ledger. That shortfall is not taken from the failed script. Safety: generated code runs in a subprocess with a restricted import allowlist and a 5-second timeout. Privacy: uploads are held for the request; the script is written in a temporary directory that is destroyed when the run finishes. Blotter does not store the files. Uploaded file contents are included in the AI model call required to generate the reconciliation script; Blotter does not control data retention on the model provider's side. Consent: users must explicitly acknowledge data handling and AI use before the reconcile action is enabled — this is enforced in the interface, not just stated in documentation. Bias: matching is deterministic numerical comparison of invoice amounts to payment amounts. There is no demographic, behavioral, or identity input in the pipeline. Copyright: Blotter writes code and a ledger, not creative or copyrighted content.
