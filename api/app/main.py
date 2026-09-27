@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-app = FastAPI(title="LedgerHeal")
+app = FastAPI(title="Blotter")
 
 
 @app.get("/health")
 def health() -> dict[str, str | bool]:
-    return {"ok": True, "service": "ledgerheal"}
+    return {"ok": True, "service": "blotter"}
