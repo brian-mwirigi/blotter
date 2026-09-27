@@ -1,0 +1,28 @@
+:root {
+  color: #1a1714;
+  background: #efeae1;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+h1 {
+  font-family: Georgia, "Palatino Linotype", serif;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0.5rem 0 1rem;
+}
+
+p {
+  margin: 0;
+  color: #5e584f;
+}
