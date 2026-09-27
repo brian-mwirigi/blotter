@@ -70,13 +70,22 @@ img {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   height: 2.6rem;
   padding: 0 1rem;
+  border: 0;
   border-radius: 8px;
   background: var(--green);
   color: white;
+  font-family: inherit;
   font-weight: 600;
   font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 .btn:hover {
@@ -336,12 +345,220 @@ h1 {
   border-top: 1px solid var(--line);
 }
 
+.demo {
+  padding-top: 2.4rem;
+}
+
+.uploads {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: stretch;
+  margin-top: 1.6rem;
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--wash);
+  cursor: pointer;
+}
+
+.file span,
+.file em {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-style: normal;
+}
+
+.file strong {
+  font-size: 0.98rem;
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.upload-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+.log-panel {
+  background: #121a16;
+  color: #e7f2ec;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.log-panel header,
+.log-panel footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.log-panel header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.log-panel footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(231, 242, 236, 0.62);
+  font-size: 0.82rem;
+}
+
+.attempt {
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  background: #e7f2ec;
+  color: var(--green-deep);
+  font-weight: 600;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.attempt.retry {
+  background: #fff4d6;
+  color: #8a5a00;
+}
+
+.attempt.done {
+  background: #d9f5e6;
+  color: var(--green-deep);
+}
+
+.log {
+  flex: 1;
+  max-height: 640px;
+  overflow: auto;
+  padding: 0.4rem 1rem 1rem;
+}
+
+.log p {
+  margin: 0.7rem 0 0;
+}
+
+.log .info {
+  color: #d5e6dc;
+}
+
+.log .error {
+  color: #ffb4a2;
+  font-weight: 600;
+}
+
+.log .warn {
+  color: #f3d48a;
+  font-weight: 600;
+}
+
+.log .ok {
+  color: #8ee0b8;
+  font-weight: 600;
+}
+
+.log pre {
+  margin: 0.45rem 0 0.2rem;
+  padding: 0.75rem 0.8rem;
+  background: #0b100e;
+  border-radius: 10px;
+  overflow: auto;
+  max-height: 220px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: #d7eee3;
+  white-space: pre-wrap;
+}
+
+.log pre.trace {
+  color: #ffd0c4;
+}
+
+.log-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: rgba(231, 242, 236, 0.55);
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.result-panel h2 {
+  margin: 0.15rem 0 0.45rem;
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.result-panel .detail,
+.result-empty p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.counts {
+  display: flex;
+  gap: 0.45rem;
+  align-items: baseline;
+  margin: 0.9rem 0;
+  color: var(--muted);
+}
+
+.counts strong {
+  color: var(--ink);
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.result-empty {
+  padding: 1.4rem;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  background: var(--wash);
+}
+
+.result-empty h2 {
+  margin-bottom: 0.4rem;
+}
+
 @media (max-width: 860px) {
   .hero,
   .split,
   .steps,
   .band .wrap,
-  .close {
+  .close,
+  .uploads,
+  .demo-grid {
     grid-template-columns: 1fr;
     display: grid;
   }
