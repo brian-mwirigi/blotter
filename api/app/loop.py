@@ -4,8 +4,9 @@ import json
 import subprocess
 from dataclasses import dataclass
 
+from app.invariants import repeated_ids, tie_out_problems
 from app.sandbox import ScriptRejected, run_script
-from app.schema import Ledger
+from app.schema import Invoice, Ledger, Receipt
 
 
 @dataclass(frozen=True)
@@ -36,7 +37,14 @@ def extract_code(text: str) -> str:
     return block.strip() + "\n"
 
 
-def heal(model: ScriptModel, task: str, *, max_tries: int = 3) -> HealResult:
+def heal(
+    model: ScriptModel,
+    task: str,
+    *,
+    invoices: list[Invoice] | None = None,
+    receipts: list[Receipt] | None = None,
+    max_tries: int = 3,
+) -> HealResult:
     error = ""
     attempts: list[Attempt] = []
     for iteration in range(1, max_tries + 1):
@@ -62,6 +70,12 @@ def heal(model: ScriptModel, task: str, *, max_tries: int = 3) -> HealResult:
             error = f"output was not a ledger: {exc}"
             attempts.append(Attempt(iteration, "invalid", error))
             continue
+        if invoices is not None and receipts is not None:
+            problems = repeated_ids(ledger) + tie_out_problems(ledger, invoices, receipts)
+            if problems:
+                error = "\n".join(problems)
+                attempts.append(Attempt(iteration, "unbalanced", error))
+                continue
         attempts.append(Attempt(iteration, "accepted", "ledger accepted"))
         mode = "healed" if iteration > 1 else "clean"
         return HealResult(ledger, attempts, mode)
