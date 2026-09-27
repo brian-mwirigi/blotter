@@ -167,6 +167,7 @@ export function DemoRun({
     <>
       <header className="nav">
         <Link className="logo" href="/">
+          <i />
           Blotter
         </Link>
         <nav className="nav-links">
