@@ -7,7 +7,7 @@ This repository is the scaffold for that payments check. The matcher, the sandbo
 ## Layout
 
 - `api/` holds the FastAPI service. `GET /health` is the only route so far.
-- `web/` holds the Next.js app. The first screen states the shortfall.
+- `web/` holds the Next.js app. The landing page states the shortfall and a Live demo button opens the ledger.
 - `data/` is where the synthetic invoice and statement files will go.
 - `tests/` is where the ledger checks will go.
 
