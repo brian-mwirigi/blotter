@@ -7,7 +7,7 @@ import urllib.request
 
 from app.loop import ScriptModel
 
-DEFAULT_MODEL = "deepseek-ai/deepseek-v4-flash-0731"
+DEFAULT_MODEL = "deepseek-ai/deepseek-v4.1-flash"
 ENDPOINT = "https://integrate.api.nvidia.com/v1/chat/completions"
 
 

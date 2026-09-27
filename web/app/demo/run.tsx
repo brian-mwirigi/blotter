@@ -132,7 +132,9 @@ export function DemoRun({
             rows?: Row[];
           };
           if (payload.kind === "meta") {
-            setEngine(payload.engine === "nvidia" ? payload.model || "NVIDIA" : "Local sandbox");
+            setEngine(
+              payload.engine === "cursor" ? payload.model || "composer-2.5 fast" : "Local sandbox",
+            );
           } else if (payload.kind === "attempt" && payload.iteration) {
             setAttempt(payload.iteration);
           } else if (payload.kind === "note" && payload.text) {

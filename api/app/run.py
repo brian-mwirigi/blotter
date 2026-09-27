@@ -6,10 +6,10 @@ import json
 import os
 from collections.abc import Iterator
 
+from app.composer import LABEL, ComposerModel
 from app.invariants import repeated_ids, tie_out_problems
 from app.loop import ScriptModel, iter_heal
 from app.match import reconcile
-from app.nvidia import DEFAULT_MODEL, NvidiaModel
 from app.parse import parse_amount, parse_date
 from app.report import describe
 from app.schema import Invoice, Ledger, Receipt
@@ -30,9 +30,8 @@ class _Advising(ScriptModel):
 
 
 def choose_model() -> tuple[ScriptModel, str, str]:
-    if os.environ.get("NVIDIA_API_KEY", "").strip():
-        name = os.environ.get("NVIDIA_MODEL", DEFAULT_MODEL).strip() or DEFAULT_MODEL
-        return _Advising(NvidiaModel()), "nvidia", name
+    if os.environ.get("CURSOR_API_KEY", "").strip():
+        return _Advising(ComposerModel()), "cursor", LABEL
     return LocalWriter(), "local", "local writer"
 
 

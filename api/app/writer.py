@@ -15,7 +15,7 @@ A sample statement object is {"receipt_id": "RCPT-101", "ref": "REF-101", "amoun
 Match a receipt to the invoice with the same ref.
 If the amounts are equal, add a match with invoice_id, receipt_id, ref, and amount as a string.
 If the receipt amount is smaller, add an anomaly with kind "partial", invoice_id, receipt_ids, ref, gap as a string, and detail.
-If one ref is on several receipts and the first amount equals the invoice, match only that first receipt. Add kind "duplicate_ref" whose receipt_ids are the other receipts, and omit invoice_id on that anomaly.
+If one ref is on several receipts and the first amount equals the invoice, match only that first receipt. Add kind "duplicate_ref" whose receipt_ids are the other receipts, omit invoice_id, and include detail. Every anomaly must include a detail string.
 Print only a JSON object, with no markdown, in this shape:
 {"matches": [], "anomalies": [], "shortfall": "0"}
 shortfall is the sum of the partial gaps.
@@ -31,6 +31,7 @@ HEAL_HINT = (
     "If a date is an integer or an all-digit string, it is a UNIX timestamp in UTC: "
     "datetime.fromtimestamp(int(value), tz=timezone.utc). "
     "If an amount is text, remove KSh, KES, and commas before converting it. "
+    "Every anomaly, including duplicate_ref, must include a detail string. "
     "Keep the ledger rules above."
 )
 

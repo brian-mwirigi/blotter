@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 ALLOWED_IMPORTS = frozenset(
-    {"pandas", "json", "csv", "datetime", "math", "decimal", "re", "collections"}
+    {"json", "csv", "datetime", "math", "decimal", "re", "collections", "io"}
 )
 BANNED_CALLS = frozenset({"eval", "exec", "open", "__import__"})
 
