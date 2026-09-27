@@ -35,9 +35,13 @@ def test_exact_reference_and_amount_match():
     assert ledger.shortfall == Decimal("0")
 
 
-def test_different_amount_is_not_an_exact_match():
+def test_hero_partial_is_a_gap_of_4500():
     ledger = reconcile(
         [_invoice("INV-100", "18000", "REF-100")],
         [_receipt("RCPT-100", "13500", "REF-100")],
     )
     assert ledger.matches == []
+    assert ledger.shortfall == Decimal("4500")
+    assert ledger.anomalies[0].kind == "partial"
+    assert ledger.anomalies[0].invoice_id == "INV-100"
+    assert ledger.anomalies[0].gap == Decimal("4500")
