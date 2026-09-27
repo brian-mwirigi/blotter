@@ -1,0 +1,5 @@
+invoice_id,supplier,amount_ksh,date,ref
+INV-101,Lake Flour,7500,12/03/2026,REF-101
+INV-100,Amani Hardware,18000,12/03/2026,REF-100
+INV-102,Rift Cement,22000,13/03/2026,REF-102
+INV-103,Coast Sugar,4500,14/03/2026,REF-103
