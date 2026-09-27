@@ -24,11 +24,18 @@ const faqs = [
   },
 ];
 
+const steps = [
+  ["01", "Bring the files", "Supplier invoices, and the mobile-money statement from the phone."],
+  ["02", "Match them", "A script is written for these columns, run, and checked against the totals."],
+  ["03", "Read the gap", "Short payments, duplicate references, and amounts that only looked messy."],
+];
+
 export default function Home() {
   return (
     <>
       <header className="nav">
         <Link className="logo" href="/">
+          <i />
           Blotter
         </Link>
         <nav className="nav-links">
@@ -43,43 +50,44 @@ export default function Home() {
 
       <main>
         <section className="wrap hero">
-          <div>
-            <p className="eyebrow">Payments blotter for a shop</p>
-            <h1>Which supplier is still unpaid?</h1>
-            <p className="lead">
-              The invoice says one number. The phone says another. Blotter puts
-              them on the same page and marks the gap, before the shop chases
-              the wrong payment.
-            </p>
-            <div className="hero-actions">
-              <Link className="btn" href="/demo">
-                Live demo
-              </Link>
-              <a className="btn ghost" href="#day">
-                See the KSh 4,500 gap
-              </a>
-            </div>
+          <p className="kicker">Payments blotter</p>
+          <h1>
+            Which supplier
+            <br />
+            is still unpaid?
+          </h1>
+          <p className="lead">
+            The invoice says one number. The phone says another. Blotter puts them on the same page and marks the gap, before the shop chases the wrong payment.
+          </p>
+          <div className="hero-actions">
+            <Link className="btn" href="/demo">
+              Live demo
+            </Link>
+            <a className="quiet" href="#day">
+              See the sample day
+            </a>
           </div>
-          <img
-            className="hero-photo"
-            src="/shop-counter.jpg"
-            alt="Invoices and a phone on the counter of a hardware shop"
-          />
         </section>
 
-        <section className="band">
-          <div className="wrap">
-            <article>
+        <section className="wrap bento">
+          <figure className="tile photo-tile">
+            <img src="/shop-counter.jpg" alt="Invoices and a phone on the counter of a hardware shop" />
+          </figure>
+          <div className="stat-stack">
+            <article className="tile stat">
               <span>Invoice</span>
-              <strong>KSh 18,000</strong>
+              <strong>18,000</strong>
+              <em>KSh · Amani Hardware</em>
             </article>
-            <article>
+            <article className="tile stat">
               <span>On the phone</span>
-              <strong>KSh 13,500</strong>
+              <strong>13,500</strong>
+              <em>KSh · receipt RCPT-100</em>
             </article>
-            <article>
+            <article className="tile stat open">
               <span>Still open</span>
-              <strong>KSh 4,500</strong>
+              <strong>4,500</strong>
+              <em>KSh · the gap</em>
             </article>
           </div>
         </section>
@@ -88,82 +96,54 @@ export default function Home() {
           <div className="wrap">
             <h2>From two messy files to one open item.</h2>
             <p className="intro">
-              A shop does not get a clean spreadsheet. Dates arrive as text or
-              as UNIX timestamps. Amounts arrive as numbers or as “KSh 4,500”.
-              A reference gets used twice.
+              A shop does not get a clean spreadsheet. Dates arrive as text or as UNIX timestamps. Amounts arrive as numbers or as “KSh 4,500”. A reference gets used twice.
             </p>
             <ol className="steps">
-              <li>
-                <b>1. Bring the files</b>
-                <span>Supplier invoices, and the mobile-money statement from the phone.</span>
-              </li>
-              <li>
-                <b>2. Match them</b>
-                <span>A script is written for these columns, run, and checked against the totals.</span>
-              </li>
-              <li>
-                <b>3. Read the gap</b>
-                <span>Short payments, duplicate references, and amounts that only looked messy.</span>
-              </li>
+              {steps.map(([index, title, copy]) => (
+                <li key={index}>
+                  <span>{index}</span>
+                  <b>{title}</b>
+                  <p>{copy}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </section>
 
-        <section className="section wash">
-          <div className="wrap split">
-            <img
-              src="/paper-invoices.jpg"
-              alt="Printed invoices beside a phone listing payments"
-            />
-            <div>
-              <h2>The rate on the paper is not what arrived.</h2>
-              <p className="intro">
-                Amani Hardware billed KSh 18,000. The statement shows KSh
-                13,500, and that receipt’s date is a UNIX timestamp a normal
-                import drops. Blotter keeps the row and shows the shortfall.
-              </p>
-              <Link className="btn" href="/demo">
-                Open the live demo
-              </Link>
-            </div>
-          </div>
-        </section>
-
         <section className="section" id="day">
-          <div className="wrap">
-            <h2>Sample day</h2>
-            <p className="intro">
-              Four suppliers. One short payment. One reference used twice. One
-              amount written out in words and still matched.
-            </p>
+          <div className="wrap day">
+            <div>
+              <h2>Sample day</h2>
+              <p className="intro">
+                Four suppliers. One short payment. One reference used twice. Coast Sugar was written “KSh 4,500” and still matched. Nothing has been sent.
+              </p>
+              <p className="caption">Invoiced 52,000. Received 47,500. Still open 4,500.</p>
+            </div>
             <div className="product-frame">
               <header>
-                <strong>Blotter</strong>
-                <span>Amani Hardware · nothing has been sent</span>
+                <strong>Today</strong>
+                <span>Amani Hardware</span>
               </header>
               <BlotterTable />
             </div>
-            <p className="caption">
-              Invoiced KSh 52,000. Received KSh 47,500. Still open KSh 4,500.
-            </p>
           </div>
         </section>
 
-        <section className="section wash" id="faq">
+        <section className="section" id="faq">
           <div className="wrap">
             <h2>Questions</h2>
-            <div className="faq">
+            <dl className="faq">
               {faqs.map((item) => (
-                <details key={item.q}>
-                  <summary>{item.q}</summary>
-                  <p>{item.a}</p>
-                </details>
+                <div key={item.q}>
+                  <dt>{item.q}</dt>
+                  <dd>{item.a}</dd>
+                </div>
               ))}
-            </div>
+            </dl>
           </div>
         </section>
 
-        <section className="section">
+        <section className="section tight">
           <div className="wrap">
             <div className="close">
               <div>
