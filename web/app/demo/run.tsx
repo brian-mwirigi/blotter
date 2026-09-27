@@ -11,10 +11,12 @@ type Row = {
   tone: string;
 };
 
-type Line =
-  | { id: number; kind: "note"; tone: string; text: string }
-  | { id: number; kind: "code"; text: string }
-  | { id: number; kind: "trace"; text: string };
+type LineInput =
+  | { kind: "note"; tone: string; text: string }
+  | { kind: "code"; text: string }
+  | { kind: "trace"; text: string };
+
+type Line = LineInput & { id: number };
 
 type Result = {
   mode: string;
@@ -64,7 +66,7 @@ export function DemoRun({
     if (node) node.scrollTop = node.scrollHeight;
   }, [lines]);
 
-  function push(line: Omit<Line, "id">) {
+  function push(line: LineInput) {
     nextId.current += 1;
     const id = nextId.current;
     setLines((current) => [...current, { ...line, id } as Line]);
@@ -134,7 +136,11 @@ export function DemoRun({
           };
           if (payload.kind === "meta") {
             setEngine(
-              payload.engine === "cursor" ? payload.model || "composer-2.5 fast" : "Local sandbox",
+              payload.engine === "cursor"
+                ? payload.model || "composer-2.5 fast"
+                : payload.engine === "hosted"
+                  ? "Sandbox"
+                  : "Local sandbox",
             );
           } else if (payload.kind === "attempt" && payload.iteration) {
             setAttempt(payload.iteration);

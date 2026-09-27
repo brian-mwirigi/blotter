@@ -2,9 +2,26 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { DemoRun } from "./run";
 
+function readSample(name: string) {
+  const candidates = [
+    path.join(process.cwd(), "..", "data", name),
+    path.join(process.cwd(), "data", name),
+  ];
+  for (const file of candidates) {
+    try {
+      return readFileSync(file, "utf8");
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+    }
+  }
+  throw new Error(`Missing sample file ${name}`);
+}
+
 export default function Demo() {
-  const root = path.join(process.cwd(), "..", "data");
-  const sampleInvoices = readFileSync(path.join(root, "supplier_invoices.csv"), "utf8");
-  const sampleStatement = readFileSync(path.join(root, "mock_mpesa_statement.json"), "utf8");
-  return <DemoRun sampleInvoices={sampleInvoices} sampleStatement={sampleStatement} />;
+  return (
+    <DemoRun
+      sampleInvoices={readSample("supplier_invoices.csv")}
+      sampleStatement={readSample("mock_mpesa_statement.json")}
+    />
+  );
 }

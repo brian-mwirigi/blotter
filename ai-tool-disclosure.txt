@@ -1,0 +1,20 @@
+AI inside the product
+
+- Reconcile calls Composer 2.5 fast through the Cursor API (composer-2.5, fast=true) using cursor-sdk.
+- The model writes a Python matcher. It does not state the shortfall. The script runs in a sandbox and is accepted only if a tie-out passes.
+- Sample files in: receipt date 1773273600 and amount KSh 4,500. Attempt 1 crashed at 27.7s on that timestamp. Attempt 2 was accepted at 58.3s: KSh 4,500 shortfall, INV-100 vs RCPT-100.
+- With no CURSOR_API_KEY, a local writer runs instead and the log says local. That is not a live model call.
+- After three failures the screen says Needs review and shows the deterministic ledger, not the failed script.
+
+AI used to build the project
+
+- Cursor, including Composer, wrote code, layout, and this disclosure.
+- The amounts were checked against the sample files. pytest passed 26 tests.
+
+Data, APIs, access, fallback
+
+- Dataset: synthetic data/supplier_invoices.csv and data/mock_mpesa_statement.json. No customer records. No live M-Pesa or bank API.
+- The KNBS 2016 figure (7.41 million MSMEs, 5.85 million unlicensed) is a cited statistic, not a file the model reads.
+- Consent is required before Reconcile. The sandbox allows only listed imports, times out at five seconds, and gets no API key.
+- Uploaded file text is sent in the model call. Blotter does not store it and does not control what Cursor keeps.
+- Brev was not used.

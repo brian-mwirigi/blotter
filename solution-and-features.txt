@@ -1,0 +1,21 @@
+Solution and key features
+
+What works now
+
+- A shop puts the invoice file next to the phone statement. Blotter shows who is still unpaid. It does not send money.
+- The sample day is the demo: Amani Hardware invoiced KSh 18,000, the statement shows KSh 13,500, the open gap is KSh 4,500. Lake Flour matches. Rift Cement’s reference is used twice and only the first receipt counts. Coast Sugar was written “KSh 4,500” and still matches. Invoiced 52,000. Received 47,500. Still open 4,500. Evidence: tests/test_hero.py, data/supplier_invoices.csv, data/mock_mpesa_statement.json
+- Composer 2.5 fast writes the matcher. The first script crashes on receipt date 1773273600. The error goes back. The retry is accepted and the ledger shows the KSh 4,500 shortfall. Evidence: api/app/composer.py, api/app/loop.py. Timed sample: fail at 27.7s, heal at 58.3s.
+- The script runs in a sandbox. An import allowlist and a five-second timeout sit on it. A clean exit is not success. Repeated ids and a tie-out have to pass, or the error goes back. Evidence: api/app/sandbox.py, api/app/invariants.py
+- Three failed attempts stop. The screen says Needs review and shows the deterministic ledger, not the failed script. Reconcile stays off until the consent box is checked. Evidence: web/app/demo/run.tsx, api/app/run.py
+
+Mocked, simulated, or unfinished
+
+- The files are synthetic. No live M-Pesa, no bank, no customer records.
+- Only CSV invoices and JSON statements. Other formats are untested.
+- API cost is not measured. Total run time under load is not measured. The sandbox timeout is fixed at 5 seconds.
+- With no CURSOR_API_KEY, a local writer runs and the log says local. That is not a live model call.
+
+Built at the hackathon vs reused
+
+- Built here: the matcher, the sandbox, the heal loop, the tie-out, the consent gate, and the demo.
+- Reused libraries: Next.js, FastAPI, and cursor-sdk. Brev was not used.

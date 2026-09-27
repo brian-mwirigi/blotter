@@ -122,6 +122,9 @@ export default function Home() {
               <p className="intro">
                 Four suppliers. One short payment. One reference used twice. Coast Sugar was written “KSh 4,500” and still matched. Nothing has been sent.
               </p>
+              <p className="intro">
+                Kenya’s 2016 KNBS survey counted 7.41 million MSMEs, and 5.85 million of them were unlicensed. On a Friday the hardware counter still has invoices on one side and M-Pesa messages on the phone. If that KSh 4,500 gap is missed, the shop paid for stock it was never paid for.
+              </p>
               <p className="caption">Invoiced 52,000. Received 47,500. Still open 4,500.</p>
             </div>
             <div className="product-frame">

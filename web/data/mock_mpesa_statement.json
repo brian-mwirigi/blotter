@@ -1,0 +1,37 @@
+[
+  {
+    "receipt_id": "RCPT-101",
+    "ref": "REF-101",
+    "amount": 7500,
+    "date": "12/03/2026",
+    "counterparty": "Lake Flour"
+  },
+  {
+    "receipt_id": "RCPT-100",
+    "ref": "REF-100",
+    "amount": 13500,
+    "date": 1773273600,
+    "counterparty": "Amani Hardware"
+  },
+  {
+    "receipt_id": "RCPT-102A",
+    "ref": "REF-102",
+    "amount": 22000,
+    "date": "13/03/2026",
+    "counterparty": "Rift Cement"
+  },
+  {
+    "receipt_id": "RCPT-102B",
+    "ref": "REF-102",
+    "amount": 22000,
+    "date": "13/03/2026",
+    "counterparty": "Rift Cement"
+  },
+  {
+    "receipt_id": "RCPT-103",
+    "ref": "REF-103",
+    "amount": "KSh 4,500",
+    "date": "14/03/2026",
+    "counterparty": "Coast Sugar"
+  }
+]
