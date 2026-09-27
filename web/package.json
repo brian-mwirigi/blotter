@@ -1,5 +1,5 @@
 {
-  "name": "ledgerheal-web",
+  "name": "blotter-web",
   "private": true,
   "scripts": {
     "dev": "next dev",

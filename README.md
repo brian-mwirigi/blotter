@@ -1,4 +1,4 @@
-# LedgerHeal
+# Blotter
 
 The invoice says KSh 18,000. The mobile-money log says KSh 13,500. The supplier was short KSh 4,500.
 
