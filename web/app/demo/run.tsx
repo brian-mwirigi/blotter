@@ -175,71 +175,68 @@ export function DemoRun({
           <span>Live demo</span>
         </nav>
       </header>
-      <main className="section demo">
-        <div className="wrap">
-          <p className="eyebrow">Live demo</p>
-          <h1>Reconcile this day.</h1>
-          <p className="lead">
-            The sample invoices and the mobile-money statement are already loaded. Reconcile
-            runs them in the sandbox and keeps the attempt count on screen.
-          </p>
-          <form className="uploads" onSubmit={onSubmit}>
-            <label className="file">
-              <span>Supplier invoices</span>
-              <strong>{invoices.name}</strong>
-              <em>{invoices.sample ? "Sample loaded" : "Uploaded"} · Replace</em>
-              <input
-                className="file-input"
-                type="file"
-                accept=".csv,text/csv"
-                onChange={(event) => {
-                  const file = event.target.files?.[0];
-                  if (file) void readFile(file, setInvoices);
+      <main className="demo">
+        <form className="demo-bar" onSubmit={onSubmit}>
+          <div className="demo-title">
+            <strong>Today</strong>
+            <span>{usingSample ? "Sample loaded" : "Your files"}</span>
+          </div>
+          <label className="file">
+            <span>Invoices</span>
+            <strong>{invoices.name}</strong>
+            <em>Replace</em>
+            <input
+              className="file-input"
+              type="file"
+              accept=".csv,text/csv"
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                if (file) void readFile(file, setInvoices);
+              }}
+            />
+          </label>
+          <label className="file">
+            <span>Statement</span>
+            <strong>{statement.name}</strong>
+            <em>Replace</em>
+            <input
+              className="file-input"
+              type="file"
+              accept=".json,application/json"
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                if (file) void readFile(file, setStatement);
+              }}
+            />
+          </label>
+          <div className="upload-actions">
+            {usingSample ? null : (
+              <button
+                className="btn ghost"
+                type="button"
+                onClick={() => {
+                  setInvoices({
+                    name: "supplier_invoices.csv",
+                    text: sampleInvoices,
+                    sample: true,
+                  });
+                  setStatement({
+                    name: "mock_mpesa_statement.json",
+                    text: sampleStatement,
+                    sample: true,
+                  });
                 }}
-              />
-            </label>
-            <label className="file">
-              <span>M-Pesa statement</span>
-              <strong>{statement.name}</strong>
-              <em>{statement.sample ? "Sample loaded" : "Uploaded"} · Replace</em>
-              <input
-                className="file-input"
-                type="file"
-                accept=".json,application/json"
-                onChange={(event) => {
-                  const file = event.target.files?.[0];
-                  if (file) void readFile(file, setStatement);
-                }}
-              />
-            </label>
-            <div className="upload-actions">
-              <button className="btn" type="submit" disabled={running}>
-                {running ? "Reconciling…" : "Reconcile"}
+              >
+                Sample
               </button>
-              {usingSample ? null : (
-                <button
-                  className="btn ghost"
-                  type="button"
-                  onClick={() => {
-                    setInvoices({
-                      name: "supplier_invoices.csv",
-                      text: sampleInvoices,
-                      sample: true,
-                    });
-                    setStatement({
-                      name: "mock_mpesa_statement.json",
-                      text: sampleStatement,
-                      sample: true,
-                    });
-                  }}
-                >
-                  Use the sample files
-                </button>
-              )}
-            </div>
-          </form>
+            )}
+            <button className="btn" type="submit" disabled={running}>
+              {running ? "Reconciling…" : "Reconcile"}
+            </button>
+          </div>
+        </form>
 
-          <div className="demo-grid">
+        <div className="demo-grid">
             <section className="log-panel" aria-label="Reconcile log">
               <header>
                 <strong>Run</strong>
@@ -314,15 +311,40 @@ export function DemoRun({
                   </div>
                 </>
               ) : (
-                <div className="result-empty">
-                  <p className="eyebrow">Result</p>
-                  <h2>The shortfall shows up here.</h2>
-                  <p>Reconciled count, flagged rows, and the open amount, after the run.</p>
-                </div>
+                <>
+                  <p className="eyebrow">Ledger</p>
+                  <h2>Waiting on the run.</h2>
+                  <p className="counts">
+                    <strong>—</strong> reconciled
+                    <span>·</span>
+                    <strong>—</strong> flagged
+                  </p>
+                  <div className="product-frame">
+                    <table className="sheet">
+                      <thead>
+                        <tr>
+                          <th>Supplier</th>
+                          <th className="num">Invoice</th>
+                          <th className="num">Received</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {["Lake Flour", "Amani Hardware", "Rift Cement", "Coast Sugar"].map((supplier) => (
+                          <tr key={supplier}>
+                            <td>{supplier}</td>
+                            <td className="num">—</td>
+                            <td className="num">—</td>
+                            <td>—</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
               )}
               <p className="caption">Synthetic sample. No payment is sent.</p>
             </section>
-          </div>
         </div>
       </main>
     </>
