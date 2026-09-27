@@ -113,13 +113,33 @@ img {
 }
 
 .wrap {
-  width: min(1120px, calc(100% - 3rem));
+  width: min(1240px, calc(100% - 2.5rem));
   margin: 0 auto;
 }
 
-.hero {
-  padding: 4.5rem 0 1.75rem;
-  max-width: 46rem;
+.stage {
+  width: min(1240px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  min-height: calc(100svh - 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: 1.25rem;
+  align-items: stretch;
+  padding: 1.15rem 0 1.35rem;
+}
+
+.stage-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 0.5rem;
+}
+
+.stage-visual {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  min-height: 0;
 }
 
 .kicker,
@@ -131,7 +151,7 @@ img {
 
 h1 {
   margin: 0;
-  font-size: clamp(3.4rem, 6.4vw, 5.25rem);
+  font-size: clamp(3.1rem, 4.8vw, 4.5rem);
   font-weight: 400;
   line-height: 0.96;
   letter-spacing: -0.045em;
@@ -157,13 +177,6 @@ h1 {
   padding-bottom: 0.05rem;
 }
 
-.bento {
-  display: grid;
-  grid-template-columns: 1.45fr 0.7fr;
-  gap: 0.75rem;
-  padding-bottom: 1rem;
-}
-
 .tile {
   background: var(--paper);
   border-radius: 8px;
@@ -172,25 +185,35 @@ h1 {
 
 .photo-tile {
   margin: 0;
+  min-height: 0;
+  height: 100%;
 }
 
 .photo-tile img {
   width: 100%;
   height: 100%;
-  min-height: 460px;
+  min-height: 320px;
   object-fit: cover;
+  object-position: center 62%;
 }
 
 .stat-stack {
   display: grid;
-  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--paper);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem 1.1rem 0.95rem;
+  justify-content: flex-start;
+  padding: 0.85rem 0.95rem 0.8rem;
+}
+
+.stat + .stat {
+  box-shadow: inset 1px 0 0 var(--line);
 }
 
 .stat span,
@@ -219,7 +242,7 @@ h1 {
 }
 
 .section {
-  padding: 4.25rem 0 0;
+  padding: 2.75rem 0 0;
 }
 
 .section.tight {
@@ -254,7 +277,7 @@ h1 {
   background: var(--paper);
   border-radius: 8px;
   padding: 1.15rem 1.15rem 1.3rem;
-  min-height: 11rem;
+  min-height: 0;
 }
 
 .steps span {
@@ -608,8 +631,7 @@ h1 {
 }
 
 @media (max-width: 860px) {
-  .hero,
-  .bento,
+  .stage,
   .steps,
   .day,
   .faq div,
@@ -624,11 +646,19 @@ h1 {
     display: none;
   }
 
-  .photo-tile img {
-    min-height: 240px;
+  .stage {
+    min-height: 0;
   }
 
-  .stat {
-    min-height: 5.5rem;
+  .photo-tile img {
+    min-height: 220px;
+  }
+
+  .stat-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .stat + .stat {
+    box-shadow: inset 0 1px 0 var(--line);
   }
 }

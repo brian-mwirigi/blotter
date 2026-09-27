@@ -49,46 +49,47 @@ export default function Home() {
       </header>
 
       <main>
-        <section className="wrap hero">
-          <p className="kicker">Payments blotter</p>
-          <h1>
-            Which supplier
-            <br />
-            is still unpaid?
-          </h1>
-          <p className="lead">
-            The invoice says one number. The phone says another. Blotter puts them on the same page and marks the gap, before the shop chases the wrong payment.
-          </p>
-          <div className="hero-actions">
-            <Link className="btn" href="/demo">
-              Live demo
-            </Link>
-            <a className="quiet" href="#day">
-              See the sample day
-            </a>
+        <section className="stage">
+          <div className="stage-copy">
+            <p className="kicker">Payments blotter</p>
+            <h1>
+              Which supplier
+              <br />
+              is still unpaid?
+            </h1>
+            <p className="lead">
+              The invoice says one number. The phone says another. Blotter puts them on the same page and marks the gap, before the shop chases the wrong payment.
+            </p>
+            <div className="hero-actions">
+              <Link className="btn" href="/demo">
+                Live demo
+              </Link>
+              <a className="quiet" href="#day">
+                See the sample day
+              </a>
+            </div>
           </div>
-        </section>
-
-        <section className="wrap bento">
-          <figure className="tile photo-tile">
-            <img src="/shop-counter.jpg" alt="Invoices and a phone on the counter of a hardware shop" />
-          </figure>
-          <div className="stat-stack">
-            <article className="tile stat">
-              <span>Invoice</span>
-              <strong>18,000</strong>
-              <em>KSh · Amani Hardware</em>
-            </article>
-            <article className="tile stat">
-              <span>On the phone</span>
-              <strong>13,500</strong>
-              <em>KSh · receipt RCPT-100</em>
-            </article>
-            <article className="tile stat open">
-              <span>Still open</span>
-              <strong>4,500</strong>
-              <em>KSh · the gap</em>
-            </article>
+          <div className="stage-visual">
+            <figure className="tile photo-tile">
+              <img src="/shop-counter.jpg" alt="Invoices and a phone on the counter of a hardware shop" />
+            </figure>
+            <div className="stat-stack">
+              <article className="stat">
+                <span>Invoice</span>
+                <strong>18,000</strong>
+                <em>KSh · Amani Hardware</em>
+              </article>
+              <article className="stat">
+                <span>On the phone</span>
+                <strong>13,500</strong>
+                <em>KSh · RCPT-100</em>
+              </article>
+              <article className="stat open">
+                <span>Still open</span>
+                <strong>4,500</strong>
+                <em>KSh · the gap</em>
+              </article>
+            </div>
           </div>
         </section>
 
