@@ -2,7 +2,7 @@ import subprocess
 
 import pytest
 
-from app.sandbox import run_script
+from app.sandbox import ScriptRejected, run_script
 
 
 def test_script_prints_its_result():
@@ -13,4 +13,9 @@ def test_script_prints_its_result():
 
 def test_a_slow_script_is_stopped():
     with pytest.raises(subprocess.TimeoutExpired):
-        run_script("import time\ntime.sleep(30)\n", timeout=0.2)
+        run_script("while True:\n    pass\n", timeout=0.2)
+
+
+def test_os_import_never_runs():
+    with pytest.raises(ScriptRejected):
+        run_script("import os\nos.system('echo no')\n")
