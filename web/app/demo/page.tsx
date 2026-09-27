@@ -1,36 +1,45 @@
 import Link from "next/link";
-
-const rows = [
-  {
-    kind: "Short payment",
-    detail: "Amani Hardware was invoiced KSh 18,000. The receipt is KSh 13,500. The date on that receipt is a UNIX timestamp.",
-  },
-  {
-    kind: "Duplicate reference",
-    detail: "REF-102 is on two receipts for Rift Cement.",
-  },
-  {
-    kind: "Amount as text",
-    detail: "One receipt is written KSh 4,500 and still matches Coast Sugar.",
-  },
-];
+import { BlotterTable } from "../blotter";
 
 export default function Demo() {
   return (
-    <main>
-      <p>
-        <Link href="/">Blotter</Link>
-      </p>
-      <h1>KSh 4,500 still open.</h1>
-      <p className="facts">Amani Hardware. Nothing has been sent.</p>
-      <ul className="rows">
-        {rows.map((row) => (
-          <li key={row.kind}>
-            <strong>{row.kind}</strong>
-            <span>{row.detail}</span>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <>
+      <header className="topbar">
+        <Link className="brand" href="/">
+          <strong>Blotter</strong>
+          <span>Sample day</span>
+        </Link>
+        <span className="quiet">Nothing has been sent</span>
+      </header>
+      <section className="app">
+        <div className="product">
+          <div className="app-head">
+            <div>
+              <p className="kicker">Open item</p>
+              <h1>KSh 4,500</h1>
+            </div>
+            <span className="quiet">Amani Hardware</span>
+          </div>
+          <div className="metrics">
+            <div>
+              <span>Invoiced</span>
+              <strong>52,000</strong>
+            </div>
+            <div>
+              <span>Received</span>
+              <strong>47,500</strong>
+            </div>
+            <div className="open">
+              <span>Still open</span>
+              <strong>4,500</strong>
+            </div>
+          </div>
+          <BlotterTable />
+          <p className="note">
+            The short receipt is dated as a UNIX timestamp. REF-102 was used twice. One amount was written as “KSh 4,500” and still matched.
+          </p>
+        </div>
+      </section>
+    </>
   );
 }
